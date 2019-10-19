@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Oct 19 20:34:07 2019
+
+@author: Mahdi
+"""
+
 import docx 
 import os 
 
