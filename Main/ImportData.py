@@ -31,34 +31,41 @@ class DocToText:
         self.save_path = save_path
         self.keep_text = keep_text
 
-    def Doc_Text_Convertor(self):
-        # return text or save it 
+    # def Doc_Text_Convertor(self):
+    #     # return text or save it 
     def Docx_Text_Convertor(self):
         # return text or save it 
+        try:
+            number=number+1
+            file_path = the_path+filename
+            doc = docx.Document(file_path)
+            temp_doc = []
+            for i in doc.paragraphs:
+                temp = i.text.split()
+                for j in temp:
+                    temp_doc.append(j)
+            temp_doc = seperator.join(temp_doc)
+            textfile_name=str(saving_path)+preFix+ str(number) + ".txt"
 
-    def Text_Maker(self):
+            with open(textfile_name, 'w',encoding='utf8') as f:
+                for item in temp_doc:
+                    f.write("%s" % item)    
+        except:
+            pass
+
+    def Text_Maker_Save(self):
         path_string= self.path
-        x1 = re.search("*.txt$", path_string)
-        x2 = re.search("*.doc$", path_string)
-        x3 = re.search("*.docx$", path_string)
-        if x1 or x2 or x3: 
+        for filename in os.listdir(path_string):
+            x1 = re.search("*.txt$", filename)
+            x2 = re.search("*.docx$", filename)
+            x3 = re.search("*.doc$", filename)
             if x1:
                 pass
             elif(x2): 
-                Doc_Text_Convertor(self)
-            elif(x3)
-                Docx_Text_Convertor(self)
-        else: 
-            for filename in os.listdir(path_string):
-                x1 = re.search("*.txt$", filename)
-                x2 = re.search("*.doc$", filename)
-                x3 = re.search("*.docx$", filename)
-                if x1:
-                    pass
-                elif(x2): 
-                    Doc_Text_Convertor(self)
-                elif(x3)
-                    Docx_Text_Convertor(self)
-                
+                self.Docx_Text_Convertor()
+            elif(x3):                
+                print(filename," file will not be processed because its format is not\
+                        accepted by this software. ( only accepts .txt and .docx )")
+
 
     
