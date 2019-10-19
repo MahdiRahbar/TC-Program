@@ -36,12 +36,29 @@ class DocToText:
     def Docx_Text_Convertor(self):
         # return text or save it 
 
-    def Check_Text_Status(self):
+    def Text_Maker(self):
         path_string= self.path
         x1 = re.search("*.txt$", path_string)
         x2 = re.search("*.doc$", path_string)
         x3 = re.search("*.docx$", path_string)
-
+        if x1 or x2 or x3: 
+            if x1:
+                pass
+            elif(x2): 
+                Doc_Text_Convertor(self)
+            elif(x3)
+                Docx_Text_Convertor(self)
+        else: 
+            for filename in os.listdir(path_string):
+                x1 = re.search("*.txt$", filename)
+                x2 = re.search("*.doc$", filename)
+                x3 = re.search("*.docx$", filename)
+                if x1:
+                    pass
+                elif(x2): 
+                    Doc_Text_Convertor(self)
+                elif(x3)
+                    Docx_Text_Convertor(self)
                 
 
     
