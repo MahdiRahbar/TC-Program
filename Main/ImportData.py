@@ -36,7 +36,6 @@ class DocToText:
     def Docx_Text_Convertor(self):
         # return text or save it 
         try:
-            number=number+1
             file_path = the_path+filename
             doc = docx.Document(file_path)
             temp_doc = []
@@ -45,7 +44,7 @@ class DocToText:
                 for j in temp:
                     temp_doc.append(j)
             temp_doc = seperator.join(temp_doc)
-            textfile_name=str(saving_path)+preFix+ str(number) + ".txt"
+            textfile_name=str(saving_path)+preFix+ str(filename[:-5]) + ".txt"
 
             with open(textfile_name, 'w',encoding='utf8') as f:
                 for item in temp_doc:
