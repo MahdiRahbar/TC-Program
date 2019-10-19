@@ -9,7 +9,7 @@ import docx
 import os 
 
 class DataImport:
-    def __init__(self, path, keep_text):
+    def __init__(self, path):
         self.path = path 
         self.keep_text = keep_text
 
@@ -23,3 +23,9 @@ class DataImport:
             set_class = str(filename[:2])
             string_corpus.append([line_seperated_data[0],set_class])
         return string_corpus
+
+class DocToText:
+    def __init__(self, path, keep_text):
+        self.path = path
+        self.keep_text = keep_text
+    
