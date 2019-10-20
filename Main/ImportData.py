@@ -10,22 +10,28 @@ import os
 import re
 
 class DataImport:
+    '''
+    DataImport Class: 
+    '''
     def __init__(self, path):
         self.path = path 
-        self.keep_text = keep_text
 
     def Corpus_Reader(self):
         string_corpus = []
         set_class = ''
         for filename in os.listdir(self.path):
-            file_path = self.path+filename
-            loaded_file = open(file_path,'r',encoding = "utf-8") 
-            line_seperated_data = loaded_file.readlines() 
-            set_class = str(filename[:2])
-            string_corpus.append([line_seperated_data[0],set_class])
+            if re.search("*.txt$", filename):
+                file_path = self.path+filename
+                loaded_file = open(file_path,'r',encoding = "utf-8") 
+                line_seperated_data = loaded_file.readlines() 
+                set_class = str(filename[:2])
+                string_corpus.append([line_seperated_data[0],set_class])
         return string_corpus
 
 class DocToText:
+    '''
+    DocToText Class: 
+    '''
     def __init__(self, path, save_path, keep_text):
         self.path = path
         self.save_path = save_path
@@ -33,10 +39,12 @@ class DocToText:
 
     # def Doc_Text_Convertor(self):
     #     # return text or save it 
-    def Docx_Text_Convertor(self):
-        # return text or save it 
-        try:
-            file_path = the_path+filename
+    def Docx_Text_Convertor(self,file_path): 
+        # return text or save it      
+        saving_path =self.save_path 
+        preFix= ''
+        my_seperator=' '  
+        try:            
             doc = docx.Document(file_path)
             temp_doc = []
             for i in doc.paragraphs:
@@ -61,7 +69,7 @@ class DocToText:
             if x1:
                 pass
             elif(x2): 
-                self.Docx_Text_Convertor()
+                self.Docx_Text_Convertor(path_string+filename)
             elif(x3):                
                 print(filename," file will not be processed because its format is not\
                         accepted by this software. ( only accepts .txt and .docx )")
