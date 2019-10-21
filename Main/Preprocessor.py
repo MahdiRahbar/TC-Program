@@ -10,7 +10,7 @@ import pandas as pd
 from hazm import *
 import joblib
 import re
-from collections import punctuation
+from string import punctuation
 from collections import OrderedDict
 from collections import Counter, defaultdict
 import collections
@@ -32,7 +32,6 @@ class PreProcessing:
         lemmatizer = Lemmatizer()
         dataList = Data
         table = str.maketrans('', '', punctuation)
-        CountVector = []
         for i in range(0, len(dataList)):
             vocabulary = []
             for j in range(0, len(dataList[i][0])):
@@ -46,7 +45,7 @@ class PreProcessing:
 
     def Data_Vectorizer(self):
         count_vect = joblib.load('model/Vec_Most_Frequence.sav')
-        X_train_counts = count_vect.fit_transform(x_train)
+        X_train_counts = count_vect.fit_transform(self.imported_data)
         X_train_counts.shape
         tf_transformer = joblib.load('model/Vec_TF_IDF.sav')
         X_train_tf = tf_transformer.transform(X_train_counts)
