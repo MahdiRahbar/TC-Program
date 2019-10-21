@@ -8,6 +8,7 @@ Created on Mon Oct 21 11:41:54 2019
 import numpy as numpy
 import pandas as pd
 from hazm import *
+import joblib
 import re
 from collections import punctuation
 from collections import OrderedDict
@@ -44,4 +45,11 @@ class PreProcessing:
         return dataList
 
     def Data_Vectorizer(self):
-        
+        count_vect = joblib.load('model/Vec_Most_Frequence.sav')
+        X_train_counts = count_vect.fit_transform(x_train)
+        X_train_counts.shape
+        tf_transformer = joblib.load('model/Vec_TF_IDF.sav')
+        X_train_tf = tf_transformer.transform(X_train_counts)
+        return X_train_tf
+
+    
