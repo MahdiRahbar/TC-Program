@@ -41,13 +41,14 @@ class PreProcessing:
             dataList[i][0] = [w.translate(table) for w in dataList[i][0]]
             dataList[i][0] = [word for word in dataList[i][0] if len(word) > 3]
             vocabulary.append(dataList[i])      
-        return dataList
+            self.imported_data = dataList
+        return self.imported_data
 
     def Data_Vectorizer(self):
-        count_vect = joblib.load('model/Vec_Most_Frequence.sav')
+        count_vect = joblib.load('tc/model/Vec_Most_Frequence.sav')
         X_train_counts = count_vect.fit_transform(self.imported_data)
         X_train_counts.shape
-        tf_transformer = joblib.load('model/Vec_TF_IDF.sav')
+        tf_transformer = joblib.load('tc/model/Vec_TF_IDF.sav')
         X_train_tf = tf_transformer.transform(X_train_counts)
         return X_train_tf
 
