@@ -10,7 +10,7 @@ from sklearn import svm
 
 class InputClassifier:
 
-    model = joblib.load('model/SVCmodel.sav')
+    model = joblib.load('tc/model/SVCmodel.sav')
 
     def __init__(self, imported_data):
         self.imported_data = imported_data
