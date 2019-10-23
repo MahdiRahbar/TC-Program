@@ -32,7 +32,7 @@
     <property name="title">
      <string>Import</string>
     </property>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="Path_Open_Button">
      <property name="geometry">
       <rect>
        <x>550</x>
@@ -58,7 +58,7 @@
       <string>Path:</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="lineEdit">
+    <widget class="QLineEdit" name="Address_Bar">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -68,7 +68,7 @@
       </rect>
      </property>
     </widget>
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="Text_Saving_Check_Box">
      <property name="geometry">
       <rect>
        <x>40</x>
@@ -88,30 +88,17 @@
       <x>10</x>
       <y>100</y>
       <width>621</width>
-      <height>111</height>
+      <height>131</height>
      </rect>
     </property>
     <property name="title">
      <string>Classification</string>
     </property>
-    <widget class="QProgressBar" name="progressBar">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>20</y>
-       <width>581</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="value">
-      <number>24</number>
-     </property>
-    </widget>
     <widget class="QWidget" name="horizontalLayoutWidget_2">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>60</y>
+       <y>20</y>
        <width>601</width>
        <height>31</height>
       </rect>
@@ -139,7 +126,7 @@
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="Classification_Start_Button">
         <property name="text">
          <string>Start</string>
         </property>
@@ -167,12 +154,41 @@
       </item>
      </layout>
     </widget>
+    <widget class="QProgressBar" name="Classification_Progress_Bar">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>581</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="value">
+      <number>24</number>
+     </property>
+    </widget>
+    <widget class="QLabel" name="Process_Status_Label">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>90</y>
+       <width>181</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Status </string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>220</y>
+      <y>240</y>
       <width>621</width>
       <height>111</height>
      </rect>
@@ -199,7 +215,7 @@
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>40</width>
+            <width>30</width>
             <height>20</height>
            </size>
           </property>
@@ -208,28 +224,20 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_11">
-        <item>
-         <widget class="QLabel" name="label_2">
-          <property name="text">
-           <string> Class :</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <layout class="QHBoxLayout" name="horizontalLayout_11"/>
       </item>
       <item>
-       <widget class="QTextBrowser" name="textBrowser">
+       <widget class="QTextBrowser" name="Output_Text">
         <property name="minimumSize">
          <size>
-          <width>100</width>
+          <width>140</width>
           <height>20</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>100</width>
-          <height>50</height>
+          <height>70</height>
          </size>
         </property>
        </widget>
@@ -244,7 +252,7 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>40</width>
+          <width>30</width>
           <height>20</height>
          </size>
         </property>
