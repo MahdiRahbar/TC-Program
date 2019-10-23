@@ -31,7 +31,7 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         self.prog = 0
         self.Classification_Progress_Bar.setRange(0, 100)
         self.Classification_Progress_Bar.setValue(self.prog)
-
+        self.status ='status'
     def init_GUI(self):
         """
         Initialize the GUI of application
@@ -84,22 +84,51 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         #                            isChecked() else False)
 
         self.user_in = self.data_reader.Corpus_Reader()
-
+        self.prog =0 
+        self.Progress_Bar_hndle()
 
 
         # TODO: Handle exception when it fails to load dataset and show
         # the error in message box
         self.set_pbar_range(100)
-
+        
         self.Stop_Word_List = ''
         self.PreProc = Preprocessor.PreProcessing(self.user_in, self.Stop_Word_List)
-        self.PreProc.String_Splitter()
-        self.PreProc.TextCleaner()
-        self.PreProc.wordToString()
-        self.Preprocessed_Data = self.PreProc.Data_Vectorizer()
-        # print(Data.shape)
-        self.clf = classifier.InputClassifier(self.Preprocessed_Data)
+        self.prog=10
+        self.Progress_Bar_hndle()
 
+        self.status ='Pre-processing...'
+        self.Display_Status()
+        self.PreProc.String_Splitter()
+        self.prog =30 
+        self.Progress_Bar_hndle()
+
+        self.status ='Pre-processing...'
+        self.Display_Status()
+        self.PreProc.TextCleaner()
+        self.prog=70
+        self.Progress_Bar_hndle()
+
+        self.status ='Pre-processing...'
+        self.Display_Status()
+        self.PreProc.wordToString()
+        self.prog=80
+        self.Progress_Bar_hndle()
+
+        self.status ='Classification...'
+        self.Display_Status()
+        self.Preprocessed_Data = self.PreProc.Data_Vectorizer()
+        self.prog = 90
+        self.Progress_Bar_hndle()
+
+        # print(Data.shape)
+        # self.status ='Classification...'
+        # self.Display_Status()
+        self.clf = classifier.InputClassifier(self.Preprocessed_Data)
+        self.status ='Done!'
+        self.Display_Status()
+        self.prog = 100
+        self.Progress_Bar_hndle()
 
         print(self.clf.SVCClassifier())
         self.Output_Text.setText(str(self.Display_labels()))
@@ -123,6 +152,14 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
                 self.result_text = self.result_text + str(no_counter)+ ": "+ "علوم انسانی" + "\n"
 
         return self.result_text
+    # def Progress_Bar_changer(self,input_range):
+    #     prog_temp = input_range
+    #     prog_change = 0
+    #     while(prog_change < input_range):
+    #         prog_temp /= 2 
+    #         prog_change += prog_temp
+    #         self.prog += prog_temp
+    #         self.Progress_Bar_hndle(self.prog)
 
     def Progress_Bar_hndle(self):
         
@@ -130,7 +167,8 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
 
         
 
-
+    def Display_Status(self):
+        self.Process_Status_Label.setText(self.status)
 
 
 

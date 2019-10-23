@@ -34,6 +34,7 @@ class PreProcessing:
         lemmatizer = Lemmatizer()
         dataList = Data
         table = str.maketrans('', '', punctuation)
+        
         for i in range(0, len(dataList)):
             for j in range(0, len(dataList[i][0])):
                 dataList[i][0][j] = stemmer.stem(dataList[i][0][j])                
