@@ -62,7 +62,7 @@ class PreProcessing:
         count_vect = CountVectorizer(decode_error="replace",\
                                     vocabulary=pickle.load(open("./tc/model/count_vect.pkl", "rb")))  # count_vect.pkl
         X_train_counts = count_vect.fit_transform(self.imported_data)
-        print(X_train_counts.shape)
+        # print(X_train_counts.shape)
         tf_transformer = TfidfTransformer().fit(X_train_counts) # use_idf=False
         X_train_tf = tf_transformer.transform(X_train_counts)
         # print(X_train_counts.shape)
