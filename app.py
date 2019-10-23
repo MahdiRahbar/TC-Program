@@ -133,9 +133,11 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         self.Progress_Bar_hndle()
 
         print(self.clf.SVCClassifier())
-        self.Output_Text.setText(str(self.Display_labels()))
+        print(self.clf.SVC_Proba())
+        # self.Output_Text.setText(str(self.Display_labels()))
+        self.Output_Text.setText(str(self.clf.Display_Proba()))
 
-        print(self.clf.Show_Label())
+        # print(self.clf.Show_Label())
 
     def Display_labels(self):
         self.result_text = ''
@@ -254,13 +256,3 @@ def main():
     tcapp = TCApp()
     tcapp.show()
     sys.exit(app.exec_())
-
-# main()
-
-
-    # app = QtWidgets.QApplication(sys.argv)
-    # MainWindow = QtWidgets.QMainWindow()
-    # ui = Ui_MainWindow()
-    # ui.setupUi(MainWindow)
-    # MainWindow.show()
-    # sys.exit(app.exec_())
