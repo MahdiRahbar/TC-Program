@@ -28,6 +28,8 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         self.data_info = None
         self.init_GUI()
 
+        self.Classification_Start_Button.setEnabled(False)
+
         self.prog = 0
         self.Classification_Progress_Bar.setRange(0, 100)
         self.Classification_Progress_Bar.setValue(self.prog)
