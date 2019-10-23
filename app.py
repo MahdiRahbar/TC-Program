@@ -205,7 +205,7 @@ def main():
     tcapp.show()
     sys.exit(app.exec_())
 
-main()
+# main()
 
 
     # app = QtWidgets.QApplication(sys.argv)
