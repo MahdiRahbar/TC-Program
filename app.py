@@ -28,6 +28,10 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         self.data_info = None
         self.init_GUI()
 
+        self.prog = 0
+        self.Classification_Progress_Bar.setRange(0, 100)
+        self.Classification_Progress_Bar.setValue(self.prog)
+
     def init_GUI(self):
         """
         Initialize the GUI of application
@@ -39,6 +43,8 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         # Buttons
         self.Path_Open_Button.clicked.connect(self.get_data_path)
         self.Classification_Start_Button.clicked.connect(self.Classifier_trggr)
+        self.Classification_Start_Button.clicked.connect(self.Progress_Bar_hndle)
+
 
 
     def get_data_path(self):
@@ -117,6 +123,10 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
                 self.result_text = self.result_text + str(no_counter)+ ": "+ "علوم انسانی" + "\n"
 
         return self.result_text
+
+    def Progress_Bar_hndle(self):
+        
+        self.Classification_Progress_Bar.setValue(self.prog)
 
         
 
