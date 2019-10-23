@@ -21,5 +21,7 @@ class InputClassifier:
         return list(le.inverse_transform(self.Fin_Results))
 
     def SVCClassifier(self):
-        self.Fin_Results =InputClassifier.model.predict(self.imported_data)
+        self.Fin_Results = InputClassifier.model.predict(self.imported_data)
         return self.Fin_Results 
+    def SVC_Proba(self):
+        return InputClassifier.model.predict_proba(self.imported_data)
