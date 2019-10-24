@@ -19,22 +19,28 @@ class Data_Reader:
         self.path = path
         self.save_path = save_path
         self.keep_text = keep_text
-
+        self.doc_names =  []
     # def Doc_Text_Convertor(self):
     #     # return text or save it 
 
     def Corpus_Reader(self):
         string_corpus = []
         set_class = ''
+        
         for filename in os.listdir(self.path):
-            print(filename)
-            if re.search(".txt$", filename):
+            f_name , f_ext = splitext(filename)  
+            # print(filename)
+            if f_ext==".txt":
+                self.doc_names.append(f_name)
                 file_path = self.path+'/'+filename
                 loaded_file = open(file_path,'r',encoding = "utf-8") 
                 line_seperated_data = loaded_file.readlines() 
                 set_class = str(filename[:2])
                 string_corpus.append([line_seperated_data[0],set_class])
-        return string_corpus
+            # else   
+        return string_corpus, self.doc_names
+    
+    # def Any_Doc_Opener (self):
 
 
     def Docx_Text_Convertor(self,file_path): 
@@ -59,10 +65,10 @@ class Data_Reader:
                     # print('this works in the temp appending')
                     temp_doc.append(j)
             temp_doc = seperator.join(temp_doc)
-            print('yay')
+            # print('yay')
             # textfile_name=str(saving_path)+preFix+ str(filename[:-5]) + ".txt"
             textfile_name=str(saving_path)+preFix+ file_name_wF + ".txt"
-            print(textfile_name)
+            # print(textfile_name)
             with open(textfile_name, 'w',encoding='utf8') as f:
                 for item in temp_doc:
                     f.write("%s" % item)    
