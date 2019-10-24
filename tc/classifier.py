@@ -33,7 +33,7 @@ class InputClassifier:
         Proba_M = self.SVC_Proba()
         I , J = Proba_M.shape
         for i in range(I):
-            Proba_text +='%d :  |  '%i 
+            Proba_text +='%d :  |  '%(i+1) 
             for j in range(J):
                 Proba_text = Proba_text + self.clf_labels[j] + ": %.2f " % Proba_M[i,j] + '  |  '
             Proba_text += '\n'
