@@ -34,6 +34,7 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         self.Classification_Progress_Bar.setRange(0, 100)
         self.Classification_Progress_Bar.setValue(self.prog)
         self.status ='status'
+        self.imported_data_number=0
     def init_GUI(self):
         """
         Initialize the GUI of application
@@ -85,7 +86,7 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         #                            False, True if self.normalize_box.
         #                            isChecked() else False)
 
-        self.user_in = self.data_reader.Corpus_Reader()
+        self.user_in , self.doc_names= self.data_reader.Corpus_Reader()
         self.prog =0 
         self.Progress_Bar_hndle()
 
@@ -135,27 +136,54 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         print(self.clf.SVCClassifier())
         print(self.clf.SVC_Proba())
         # self.Output_Text.setText(str(self.Display_labels()))
-        self.Output_Text.setText(str(self.clf.Display_Proba()))
-
+        # self.Output_Text.setText(str(self.clf.Display_Proba()))
+        self.Display_Table()
+        # self.Display_table()
         # print(self.clf.Show_Label())
 
-    def Display_labels(self):
+    def Display_Table(self):
+        self.label_list = self.clf.Show_Label()
+        self.no_samples = len(self.label_list)
+        self.Proba_Matrix = self.clf.SVC_Proba()
         self.result_text = ''
         no_counter = 0
-        for label in self.clf.Show_Label():
+        self.Result_Table.setRowCount(self.no_samples)
+        for label in self.label_list:
             no_counter += 1
+            self.Result_Table.setItem(no_counter-1, 0, QTableWidgetItem(str(no_counter)))
+            # print(label)
+            # if label== "fa":
+            #     self.result_text = self.result_text + str(no_counter)+ ": "+ "فنی" + "\n"
+            # if label== "pa":
+            #     self.result_text = self.result_text + str(no_counter)+ ": "+ "علوم پایه" + "\n"
+            # if label== "pe":
+            #     self.result_text = self.result_text + str(no_counter)+ ": "+ "پزشکی" + "\n"
+            # if label== "ho":
+            #     self.result_text = self.result_text + str(no_counter)+ ": "+ "هنر" + "\n"
+            # if label== "en":
+            #     self.result_text = self.result_text + str(no_counter)+ ": "+ "علوم انسانی" + "\n"
             if label== "fa":
-                self.result_text = self.result_text + str(no_counter)+ ": "+ "فنی" + "\n"
+                self.result_text = "فنی" 
             if label== "pa":
-                self.result_text = self.result_text + str(no_counter)+ ": "+ "علوم پایه" + "\n"
+                self.result_text =  "پایه" 
             if label== "pe":
-                self.result_text = self.result_text + str(no_counter)+ ": "+ "پزشکی" + "\n"
+                self.result_text = "پزشکی" 
             if label== "ho":
-                self.result_text = self.result_text + str(no_counter)+ ": "+ "هنر" + "\n"
+                self.result_text = "هنر"
             if label== "en":
-                self.result_text = self.result_text + str(no_counter)+ ": "+ "علوم انسانی" + "\n"
+                self.result_text =  "انسانی" 
+            self.Result_Table.setItem(no_counter-1, 1, QTableWidgetItem( self.result_text))
+            self.Result_Table.setItem(no_counter-1, 0, QTableWidgetItem(self.doc_names[no_counter-1]))
 
-        return self.result_text
+            for i in range(self.no_samples):
+                self.Result_Table.setItem(no_counter-1, i+2, QTableWidgetItem("%.2f"%self.Proba_Matrix[no_counter-1,i]))
+            # self.Proba_Matrix[]
+
+        # return self.result_text
+
+
+    
+
     # def Progress_Bar_changer(self,input_range):
     #     prog_temp = input_range
     #     prog_change = 0
@@ -164,6 +192,26 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
     #         prog_change += prog_temp
     #         self.prog += prog_temp
     #         self.Progress_Bar_hndle(self.prog)
+
+
+    # def Display_table(self):
+        
+        # self.Proba_View_Table.setRowCount(self.imported_data_number)
+        # self.Proba_View_Table.setVerticalHeaderLabels(('Row 1', 'Row 2', 'Row 3'))
+        # self.Proba_View_Table.setRowCount(30)
+        # self.Proba_View_Table.set
+        # self.Proba_View_Table.setColumnCount(7)
+        # self.Proba_View_Table.item(0,0).setText("Poofffff") #   setItem(0, 0, QTableWidgetItem('hey'))
+        # self.Proba_View_Table.setItem(0, 1, QTableWidgetItem('tasdasd'))
+
+        # if len(self.data_info.header_names) != 0:
+
+        #     self.feature_table.setRowCount(self.data_info.no_features)
+
+        #     for i, hdr_name in enumerate(self.data_info.header_names):
+
+        #         self.feature_table.setItem(i, 0, QTableWidgetItem(hdr_name))
+
 
     def Progress_Bar_hndle(self):
         
