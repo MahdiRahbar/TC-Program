@@ -133,8 +133,8 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         self.prog = 100
         self.Progress_Bar_hndle()
 
-        print(self.clf.SVCClassifier())
-        print(self.clf.SVC_Proba())
+        self.clf.SVCClassifier()
+        # print(self.clf.SVC_Proba())
         # self.Output_Text.setText(str(self.Display_labels()))
         # self.Output_Text.setText(str(self.clf.Display_Proba()))
         self.Display_Table()
@@ -147,6 +147,7 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         self.Proba_Matrix = self.clf.SVC_Proba()
         self.result_text = ''
         no_counter = 0
+        _, col = self.Proba_Matrix.shape
         self.Result_Table.setRowCount(self.no_samples)
         for label in self.label_list:
             no_counter += 1
@@ -175,7 +176,7 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
             self.Result_Table.setItem(no_counter-1, 1, QTableWidgetItem( self.result_text))
             self.Result_Table.setItem(no_counter-1, 0, QTableWidgetItem(self.doc_names[no_counter-1]))
 
-            for i in range(self.no_samples):
+            for i in range(col):
                 self.Result_Table.setItem(no_counter-1, i+2, QTableWidgetItem("%.2f"%self.Proba_Matrix[no_counter-1,i]))
             # self.Proba_Matrix[]
 
