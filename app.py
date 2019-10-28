@@ -15,10 +15,22 @@ from PyQt5.QtCore import QThread, pyqtSlot
 from GUI import gui
 import sys
 from os.path import expanduser
-# from Main.Preprocessor import *
 
 class TCApp(gui.Ui_MainWindow, QMainWindow):
+    """ The main class to connect
+    different parts of module: tc 
+    to GUI.
     
+    functions
+    -------------------
+    Init_GUI
+    get_data_path
+    Classifier_trggr
+    Display_Table
+    Progress_Bar_hndle
+    Display_Status
+    set_pbar_range
+    """
     def __init__(self):
         super(TCApp ,self).__init__()
 
@@ -58,10 +70,6 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         data_filename = QFileDialog.getExistingDirectory(self, "Open a folder",
                                                             "",
                                                             QFileDialog.ShowDirsOnly)
-        # data_filename, _ = QFileDialog.getOpenFileName(self, "Import Document",
-        #                                                "", "All Files"" (*);""; Docx files"" (*.docx);"";Text files (*.txt)")
-        # print(data_filename)
-
         if data_filename:
 
             self.Address_Bar.setText(str(data_filename))
@@ -82,17 +90,11 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         self.data_reader = ImportData.Data_Reader(self.Address_Bar.text(), self.Address_Bar.text() , True) # , True if self.header_check.isChecked() else False
                                       
         self.data_reader.Text_Maker_Save()
-        # self.data_reader.load_data(True if self.shuffle_box.isChecked() else
-        #                            False, True if self.normalize_box.
-        #                            isChecked() else False)
 
         self.user_in , self.doc_names= self.data_reader.Corpus_Reader()
         self.prog =0 
         self.Progress_Bar_hndle()
 
-
-        # TODO: Handle exception when it fails to load dataset and show
-        # the error in message box
         self.set_pbar_range(100)
         
         self.Stop_Word_List = ''
@@ -124,9 +126,6 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         self.prog = 90
         self.Progress_Bar_hndle()
 
-        # print(Data.shape)
-        # self.status ='Classification...'
-        # self.Display_Status()
         self.clf = classifier.InputClassifier(self.Preprocessed_Data)
         self.status ='Done!'
         self.Display_Status()
@@ -134,13 +133,8 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         self.Progress_Bar_hndle()
 
         self.clf.SVCClassifier()
-        # print(self.clf.SVC_Proba())
-        # self.Output_Text.setText(str(self.Display_labels()))
-        # self.Output_Text.setText(str(self.clf.Display_Proba()))
-        self.Display_Table()
-        # self.Display_table()
-        # print(self.clf.Show_Label())
 
+        self.Display_Table()
     def Display_Table(self):
         self.label_list = self.clf.Show_Label()
         self.no_samples = len(self.label_list)
@@ -152,17 +146,7 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         for label in self.label_list:
             no_counter += 1
             self.Result_Table.setItem(no_counter-1, 0, QTableWidgetItem(str(no_counter)))
-            # print(label)
-            # if label== "fa":
-            #     self.result_text = self.result_text + str(no_counter)+ ": "+ "فنی" + "\n"
-            # if label== "pa":
-            #     self.result_text = self.result_text + str(no_counter)+ ": "+ "علوم پایه" + "\n"
-            # if label== "pe":
-            #     self.result_text = self.result_text + str(no_counter)+ ": "+ "پزشکی" + "\n"
-            # if label== "ho":
-            #     self.result_text = self.result_text + str(no_counter)+ ": "+ "هنر" + "\n"
-            # if label== "en":
-            #     self.result_text = self.result_text + str(no_counter)+ ": "+ "علوم انسانی" + "\n"
+
             if label== "fa":
                 self.result_text = "فنی" 
             if label== "pa":
@@ -178,40 +162,6 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
 
             for i in range(col):
                 self.Result_Table.setItem(no_counter-1, i+2, QTableWidgetItem("%.2f"%self.Proba_Matrix[no_counter-1,i]))
-            # self.Proba_Matrix[]
-
-        # return self.result_text
-
-
-    
-
-    # def Progress_Bar_changer(self,input_range):
-    #     prog_temp = input_range
-    #     prog_change = 0
-    #     while(prog_change < input_range):
-    #         prog_temp /= 2 
-    #         prog_change += prog_temp
-    #         self.prog += prog_temp
-    #         self.Progress_Bar_hndle(self.prog)
-
-
-    # def Display_table(self):
-        
-        # self.Proba_View_Table.setRowCount(self.imported_data_number)
-        # self.Proba_View_Table.setVerticalHeaderLabels(('Row 1', 'Row 2', 'Row 3'))
-        # self.Proba_View_Table.setRowCount(30)
-        # self.Proba_View_Table.set
-        # self.Proba_View_Table.setColumnCount(7)
-        # self.Proba_View_Table.item(0,0).setText("Poofffff") #   setItem(0, 0, QTableWidgetItem('hey'))
-        # self.Proba_View_Table.setItem(0, 1, QTableWidgetItem('tasdasd'))
-
-        # if len(self.data_info.header_names) != 0:
-
-        #     self.feature_table.setRowCount(self.data_info.no_features)
-
-        #     for i, hdr_name in enumerate(self.data_info.header_names):
-
-        #         self.feature_table.setItem(i, 0, QTableWidgetItem(hdr_name))
 
 
     def Progress_Bar_hndle(self):
@@ -222,48 +172,6 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
 
     def Display_Status(self):
         self.Process_Status_Label.setText(self.status)
-
-
-
-        # show_dialog("Data Status", "Loaded the dataset successfully.",
-        #             QMessageBox.Information)
-
-        # self.update_data_info()
-
-        # self.user_in.class_type = type_of_target(self.user_in.y_train)
-
-        # Enable other tabs' functionalities
-        # self.enable_classify()
-        # self.enable_visualize()
-        # self.enable_model()
-
-    def update_data_info(self):
-        """
-        Updates the data information like no. features, no. samples and etc.
-
-        Parameters
-        ----------
-        hdr_name : list
-            Header names of dataset.
-        """
-        pass
-        # self.data_info = self.data_reader.get_data_info()
-
-        # self.no_samples.setText(str(self.data_info.no_samples))
-        # self.no_features.setText(str(self.data_info.no_features))
-        # self.no_classes.setText(str(self.data_info.no_class))
-
-        # # print(self.data_info.header_names)
-
-        # if len(self.data_info.header_names) != 0:
-
-        #     self.feature_table.setRowCount(self.data_info.no_features)
-
-        #     for i, hdr_name in enumerate(self.data_info.header_names):
-
-        #         self.feature_table.setItem(i, 0, QTableWidgetItem(hdr_name))
-
-
 
 
     @pyqtSlot(int)
@@ -294,9 +202,7 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         """
 
         self.Classification_Progress_Bar.setValue(pbar_val)
-        # self.acc.setText(curr_acc)
-        # self.best_acc.setText(best_acc)
-        # self.elapsed_time.setText(elapsed_t)
+
 
 
 def main():
@@ -305,3 +211,6 @@ def main():
     tcapp = TCApp()
     tcapp.show()
     sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()
