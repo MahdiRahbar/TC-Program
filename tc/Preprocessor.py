@@ -8,6 +8,7 @@ Created on Mon Oct 21 11:41:54 2019
 import numpy as numpy
 import pandas as pd
 from hazm import *
+import nltk
 import pickle
 import joblib
 import re
@@ -22,6 +23,15 @@ from sklearn.feature_extraction.text import CountVectorizer,\
 
 
 class PreProcessing: 
+    """Preprocessing Class
+    
+    Functions
+    --------------
+    TextCleaner
+    String_Splitter
+    wordToString
+    Data_Vectorizer
+    """
     def __init__(self, imported_data,stopwords_list):
         self.imported_data = imported_data
         self.stopwords_list = stopwords_list
@@ -46,7 +56,6 @@ class PreProcessing:
         return self.imported_data
 
     def String_Splitter(self):
-        # print(type(self.imported_data[0][0][23]))
         for i in range(len(self.imported_data)):
             self.imported_data[i][0]=self.imported_data[i][0].split()
         return self.imported_data
@@ -59,14 +68,11 @@ class PreProcessing:
         return self.imported_data
 
     def Data_Vectorizer(self):
-        # count_vect = joblib.load('./tc/model/Vec_Most_Frequence.sav')
         count_vect = CountVectorizer(decode_error="replace",\
                                     vocabulary=pickle.load(open("./tc/model/count_vect.pkl", "rb")))  # count_vect.pkl
         X_train_counts = count_vect.fit_transform(self.imported_data)
-        # print(X_train_counts.shape)
         tf_transformer = TfidfTransformer().fit(X_train_counts) # use_idf=False
         X_train_tf = tf_transformer.transform(X_train_counts)
-        # print(X_train_counts.shape)
 
         return X_train_tf
 
