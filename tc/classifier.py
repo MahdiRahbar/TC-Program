@@ -9,6 +9,14 @@ import joblib
 from sklearn import svm
 
 class InputClassifier:
+    """InputClassifier
+    Functions
+    -------------
+    Show_Label
+    SVCClassifier
+    SVC_Proba
+    Display_Proba
+    """
 
     model = joblib.load('./tc/model/SVCmodel_Proba.sav')
     labels = joblib.load('./tc/model/label_encoder.joblib')
