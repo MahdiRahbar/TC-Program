@@ -50,7 +50,7 @@ class Data_Reader:
         temp=''
         file_name_ = ntpath.basename(file_path)
         file_name_wF, f_ext = splitext(file_name_)
-        print(file_path)
+        # print(file_path)
         try:            
             doc = docx.Document(file_path)
             temp_doc = []
@@ -76,8 +76,10 @@ class Data_Reader:
 
             elif(f_ext == '.docx'): 
                 self.Docx_Text_Convertor(path_string+"/"+filename)
-            else:                
+            elif(f_ext!=''):                
                 print(filename," file will not be processed because its format is not accepted by this software. ( only accepts .txt and .docx )")
+            else:
+                pass
 
 
 
