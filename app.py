@@ -183,12 +183,11 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
     @pyqtSlot(int)
     def set_pbar_range(self, pbar_rng):
         """
-        Sets range of the progress bar by the grid search thread.
+        Sets range of the progress bar.
 
         Parameters
         ----------
-        pbar_rng : int
-            range of the progress bar.
+        
         """
 
         self.Classification_Progress_Bar.setRange(0, pbar_rng)
@@ -196,15 +195,11 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
     @pyqtSlot(int, str, str, str)
     def update_gs_info(self, pbar_val): #  ,curr_acc, best_acc, elapsed_t
         """
-        Updates current value of the progress bar, current accuracy, and best
-        accuract, elapsed time.
+        Updates current value of the progress bar.
 
         Parameters
         ----------
-        pbar_val : int
-            value of progress bar.
 
-        curr_acc
         """
 
         self.Classification_Progress_Bar.setValue(pbar_val)
