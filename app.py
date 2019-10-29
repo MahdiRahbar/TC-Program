@@ -96,45 +96,51 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
         self.Progress_Bar_hndle()
 
         self.set_pbar_range(100)
-        
-        self.Stop_Word_List = ''
-        self.PreProc = Preprocessor.PreProcessing(self.user_in, self.Stop_Word_List)
-        self.prog=10
-        self.Progress_Bar_hndle()
+        if (len(self.user_in))!=0:
+            self.Stop_Word_List = ''
+            self.PreProc = Preprocessor.PreProcessing(self.user_in, self.Stop_Word_List)
+            self.prog=10
+            self.Progress_Bar_hndle()
 
-        self.status ='Pre-processing...'
-        self.Display_Status()
-        self.PreProc.String_Splitter()
-        self.prog =30 
-        self.Progress_Bar_hndle()
+            self.status ='Pre-processing...'
+            self.Display_Status()
+            self.PreProc.String_Splitter()
+            self.prog =30 
+            self.Progress_Bar_hndle()
 
-        self.status ='Pre-processing...'
-        self.Display_Status()
-        self.PreProc.TextCleaner()
-        self.prog=70
-        self.Progress_Bar_hndle()
+            self.status ='Pre-processing...'
+            self.Display_Status()
+            self.PreProc.TextCleaner()
+            self.prog=70
+            self.Progress_Bar_hndle()
 
-        self.status ='Pre-processing...'
-        self.Display_Status()
-        self.PreProc.wordToString()
-        self.prog=80
-        self.Progress_Bar_hndle()
+            self.status ='Pre-processing...'
+            self.Display_Status()
+            self.PreProc.wordToString()
+            self.prog=80
+            self.Progress_Bar_hndle()
 
-        self.status ='Classification...'
-        self.Display_Status()
-        self.Preprocessed_Data = self.PreProc.Data_Vectorizer()
-        self.prog = 90
-        self.Progress_Bar_hndle()
+            self.status ='Classification...'
+            self.Display_Status()
+            self.Preprocessed_Data = self.PreProc.Data_Vectorizer()
+            self.prog = 90
+            self.Progress_Bar_hndle()
 
-        self.clf = classifier.InputClassifier(self.Preprocessed_Data)
-        self.status ='Done!'
-        self.Display_Status()
-        self.prog = 100
-        self.Progress_Bar_hndle()
+            self.clf = classifier.InputClassifier(self.Preprocessed_Data)
+            self.status ='Done!'
+            self.Display_Status()
+            self.prog = 100
+            self.Progress_Bar_hndle()
 
-        self.clf.SVCClassifier()
+            self.clf.SVCClassifier()
 
-        self.Display_Table()
+            self.Display_Table()
+        else:
+            self.Classification_Start_Button.setEnabled(False)
+            self.status ='No valid file in the directory!'
+            self.Display_Status()
+            self.Result_Table.setRowCount(0)
+
     def Display_Table(self):
         self.label_list = self.clf.Show_Label()
         self.no_samples = len(self.label_list)
