@@ -7,7 +7,8 @@ Created on Mon Oct 21 11:41:54 2019
 
 import numpy as numpy
 import pandas as pd
-from hazm import *
+from hazm import Stemmer
+from hazm import Lemmatizer
 import nltk
 import pickle
 import joblib
