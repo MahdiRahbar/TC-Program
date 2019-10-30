@@ -85,6 +85,13 @@ class TCApp(gui.Ui_MainWindow, QMainWindow):
     def Classifier_trggr(self):
         """
         Loads a dataset.
+
+        functions
+        ----------------
+        Display_Table
+        Progress_Bar_hndle
+        Display_Status
+        Display_Status 
         """
 
         self.data_reader = ImportData.Data_Reader(self.Address_Bar.text(), self.Address_Bar.text() , True) # , True if self.header_check.isChecked() else False
