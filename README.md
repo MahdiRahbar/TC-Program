@@ -8,7 +8,8 @@ For running the application, run CMD or Terminal in the main directory of the pr
 * Hazm
 * NLTK
 * PyQt5
-* 
+
+  
 *************
 ### How to Run?
 ```python
