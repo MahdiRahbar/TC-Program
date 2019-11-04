@@ -5,6 +5,10 @@ For running the application, run the cmd or Terminal in the main directory of th
 ```python
 python main.py
 ```
+For running on Linux enter the following code:
+```python
+python3 main.py
+```
 
 More details will be add soon! :)
 
