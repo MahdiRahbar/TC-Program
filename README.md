@@ -1,6 +1,6 @@
 ## Thesis Classifier Program (TCP)
 
-For running the application, run the cmd or Terminal in the main directory of the program and then run the following code.
+For running the application, run CMD or Terminal in the main directory of the program and then run the following code.
 
 #### Requirements: 
 * Numpy 
